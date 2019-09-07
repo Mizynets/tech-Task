@@ -1,15 +1,34 @@
-import React from 'react';
-import s from './index.module.css';
-import FilmListItem from '../FilmListItem';
+import React from "react";
+import s from "./index.module.css";
+import FilmListItem from "../FilmListItem";
+import { connect } from "react-redux";
 
-const FilmList = () => {
-return(
-    <ul className={s.FilmList}>
-        <FilmListItem />
-        <FilmListItem />
-        <FilmListItem />
-    </ul>
-)
+const FilmList = props => {
+  const { filmList } = props;
+  let list = filmList.map(film => {
+    const { Title, ReleaseYear, Format, Stars } = film;
+    return (
+      <li key={film.Title}>
+        <FilmListItem
+          title={Title}
+          year={ReleaseYear}
+          format={Format}
+          stars={Stars}
+        />
+      </li>
+    );
+  });
+
+  return <ul className={s.FilmList}>{list}</ul>;
 };
 
-export default FilmList;
+const mapStateToProps = state => {
+  return {
+    filmList: state.filmList
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(FilmList);
