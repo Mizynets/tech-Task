@@ -1,12 +1,16 @@
 import React, { Component } from "react";
-import './App.css';
+import "./App.css";
+import Header from "./components/Header";
+import Layout from "./components/Layout";
+import HomePage from "./components/Pages/HomePage";
 
 class App extends Component {
-  render(){
-    return(
-      <div>
-        APP
-      </div>
+  render() {
+    return (
+      <Layout>
+        <Header />
+        <HomePage />
+      </Layout>
     );
   }
 }
@@ -19,26 +23,18 @@ export default App;
 //   };
 
 //   convertToJson = text => {
-//     const arr = text.split("\n");
-//     let arrObjElem = [];
-//     let arrAllObjField = [];
+//     let strText = text;
+//     const arr = strText.split("\n");
 //     const array_size = 4;
 //     const sliced_array = [];
 
-//     arr.forEach(el => {
-//       return arrObjElem.push(el.split(": "));
-//     });
-
-//     arrObjElem.forEach(el => {
-//       if (el.length === 2) {
-//         el[0] = el[0].replace(/\s+/g, "");
-//         let objRes = {};
-//         let zero = 0;
-//         let one = 1;
-//         objRes[el[zero]] = el[one++];
-//         arrAllObjField.push(objRes);
+//     const filterArray = arr.filter(item => !!item)
+//     const arrAllObjField = filterArray.map(item => {
+//       const entries = item.split(":");
+//       return {
+//         [entries[0].trim()]: entries[1].trim()
 //       }
-//     });
+//     })
 
 //     for (let i = 0; i < arrAllObjField.length; i += array_size) {
 //       sliced_array.push(arrAllObjField.slice(i, i + array_size));
