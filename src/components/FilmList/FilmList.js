@@ -14,6 +14,7 @@ const FilmList = props => {
           year={ReleaseYear}
           format={Format}
           stars={Stars}
+          id={Title}
         />
       </li>
     );
