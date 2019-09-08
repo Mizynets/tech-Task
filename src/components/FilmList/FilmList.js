@@ -8,7 +8,7 @@ const FilmList = props => {
   let list = filmList.map(film => {
     const { Title, ReleaseYear, Format, Stars } = film;
     return (
-      <li key={film.Title}>
+      <li key={film.Title} className={s.list_item}>
         <FilmListItem
           title={Title}
           year={ReleaseYear}

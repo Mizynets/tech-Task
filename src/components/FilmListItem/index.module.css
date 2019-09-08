@@ -1,7 +1,9 @@
 .FilmListItem{
     border: 1px solid black;
     padding: 15px;
-    margin-bottom: 15px;
+}
+.FilmListItem:last-child{
+    margin-bottom: 0;
 }
 
 .text{

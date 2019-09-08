@@ -1,3 +1,11 @@
 .FilmList{
     list-style: none;
 }
+
+.list_item{
+    margin-top: 15px;
+}
+
+.list_item:first-child{
+    margin-top: 0px;
+}

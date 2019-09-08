@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Layout from "./components/Layout";
-import HomePage from "./components/Pages/HomePage";
-import AddFilmPage from "./components/Pages/AddFilmPage/AddFilmPage";
+import HomePage from "./container/HomePage";
+import AddFilmPage from "./container/AddFilmPage/AddFilmPage";
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 
@@ -11,7 +11,6 @@ class App extends Component {
   render() {
     return (
       <Layout>
-        <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/add" component={AddFilmPage}/>
