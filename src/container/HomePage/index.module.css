@@ -1,0 +1,15 @@
+.content{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.filmList{
+width: 60%;
+}
+
+.searchInput{
+width: 35%;
+position:sticky; top:30px;
+}

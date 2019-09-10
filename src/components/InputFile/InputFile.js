@@ -35,6 +35,7 @@ const InputFile = props => {
   const readFile = async e => {
     if (e.target.files[0]) {
       const file = e.target.files[0];
+      console.log(file)
       const reader = new FileReader();
       reader.readAsText(file);
 
@@ -53,8 +54,9 @@ const InputFile = props => {
 
   const uploadFilm = async e => {
     let data = await readFile(e).then(response => response);
-    console.log(data);
     props.filmLoaded(data);
+    const serialArr = JSON.stringify(data);
+    localStorage.setItem('filmArr', serialArr);
   };
 
   return (

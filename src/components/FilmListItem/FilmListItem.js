@@ -5,21 +5,21 @@ import { deleteFilm } from "../ReduxStore/actions";
 
 const FilmListItem = ({ title, year, format, stars, id, deleteFilm }) => {
   return (
-    <div className={s.FilmListItem}>
+    <div className={s.filmListItem}>
       <p className={s.text}>
-        <span className={s.description}>Name: </span>
+        <span className={s.spanText}>Name: </span>
         {title}
       </p>
       <p className={s.text}>
-        <span className={s.description}>Release Year: </span>
+        <span className={s.spanText}>Release Year: </span>
         {year}
       </p>
       <p className={s.text}>
-        <span className={s.description}>Format: </span>
+        <span className={s.spanText}>Format: </span>
         {format}
       </p>
       <p className={s.text}>
-        <span className={s.description}>Stars: </span>
+        <span className={s.spanText}>Stars: </span>
         {stars}
       </p>
       <button className={s.btn} onClick={() => deleteFilm(id)}>

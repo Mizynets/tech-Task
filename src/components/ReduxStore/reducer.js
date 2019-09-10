@@ -1,31 +1,48 @@
 import { FILM_LOADED } from "./constants";
 import { CREATE_NEW_FILM } from "./constants";
 import { DELETE_FILM } from "./constants";
+import { SEACRH_FILM } from './constants';
 
 const initialState = {
-  filmList: []
+  filmList: [],
+  searchFilm: [],
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case FILM_LOADED:
-      let newFilmList = [...state.filmList, ...action.payload];
-      return {
-        filmList: newFilmList
+
+    return {
+        filmList: [...state.filmList, ...action.payload],
+        searchFilm: [...state.filmList, ...action.payload],
       };
 
     case CREATE_NEW_FILM:
-      let newFilm = action.payload;
-      let newArrFilm = [...state.filmList, newFilm];
       return {
-        filmList: newArrFilm
+        filmList: [action.payload, ...state.filmList],
+        searchFilm: [action.payload, ...state.filmList],
       };
 
     case DELETE_FILM:
-      let deletedFilm = state.filmList.filter(film => film.Title !== action.payload);
+      const deletedFilm = state.filmList.filter(film => film.Title !== action.payload);
       return {
-        filmList: deletedFilm
+        filmList: deletedFilm,
+        searchFilm: deletedFilm,
       };
+
+    case SEACRH_FILM: 
+    const { searchTypeTitle, inputValue } = action.payload;
+    const { filmList } = state;
+    let searchType = searchTypeTitle ? "Title" : "Stars";
+    let searchedFilm = filmList.filter(film => {
+      return film[searchType].toLowerCase().includes(inputValue.toLowerCase().trim());
+    })
+
+    return{
+      ...state,
+      searchFilm: searchedFilm,
+    }
+
     default:
       return state;
   }
