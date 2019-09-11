@@ -2,7 +2,7 @@ import React from "react";
 import InputFile from "../../components/InputFile";
 import FilmList from "../../components/FilmList";
 import s from "./index.module.css";
-import SearchInput from "../../components/SearchInput";
+import SearchInput from "../SearchInput";
 
 const HomePage = () => {
   return (

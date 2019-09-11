@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import s from "./index.module.css";
 import FilmListItem from "../FilmListItem";
+import { filmLoaded } from '../ReduxStore/actions';
 import { connect } from "react-redux";
 
 class FilmList extends Component {
@@ -8,23 +9,18 @@ class FilmList extends Component {
     localStorageFilms: []
   };
 
-  componentDidMount = () => {
-    const getFilmsFromFile = JSON.parse(localStorage.getItem("filmArr"));
-    if(getFilmsFromFile){
-      this.setState({
-              localStorageFilms: getFilmsFromFile,
-            })
-    }
-    
-  };
+  // componentDidMount = () => {
+  //       const getfilms = JSON.parse(localStorage.getItem('filmArr'))
+  //       this.setState({
+  //         localStorageFilms: getfilms,
+  //       })
+  // };
 
   render() {
     const { searchFilm } = this.props;
-    const filmsList =
-      searchFilm.length !== 0 ? [ ...searchFilm] : [...this.state.localStorageFilms];
-      console.log(filmsList);
-  
-    const list = filmsList.map(film => {
+  //  const filmsList = searchFilm.length === 0 ? this.state.localStorageFilms : searchFilm;
+    
+    const list = searchFilm.map(film => {
       const { Title, ReleaseYear, Format, Stars } = film;
       return (
         <li key={film.Title} className={s.listItem}>
@@ -47,7 +43,11 @@ const mapStateToProps = ({ searchFilm }) => ({
   searchFilm
 });
 
+const mapDispatchToProps = {
+  filmLoaded,
+}
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps,
 )(FilmList);

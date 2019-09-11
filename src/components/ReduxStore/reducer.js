@@ -34,6 +34,7 @@ const reducer = (state = initialState, action) => {
     const { searchTypeTitle, inputValue } = action.payload;
     const { filmList } = state;
     let searchType = searchTypeTitle ? "Title" : "Stars";
+    
     let searchedFilm = filmList.filter(film => {
       return film[searchType].toLowerCase().includes(inputValue.toLowerCase().trim());
     })

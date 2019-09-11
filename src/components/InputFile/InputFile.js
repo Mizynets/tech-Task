@@ -3,7 +3,7 @@ import s from "./index.module.css";
 import { connect } from "react-redux";
 import { filmLoaded } from "../ReduxStore/actions";
 
-const InputFile = props => {
+const InputFile = (props) => {
   const convertToJson = text => {
     let strText = text;
     const arr = strText.split("\n");
@@ -34,8 +34,7 @@ const InputFile = props => {
 
   const readFile = async e => {
     if (e.target.files[0]) {
-      const file = e.target.files[0];
-      console.log(file)
+      const file =  e.target.files[0];
       const reader = new FileReader();
       reader.readAsText(file);
 
@@ -52,18 +51,18 @@ const InputFile = props => {
     }
   };
 
-  const uploadFilm = async e => {
+   const uploadFilm = async e => {
     let data = await readFile(e).then(response => response);
     props.filmLoaded(data);
     const serialArr = JSON.stringify(data);
     localStorage.setItem('filmArr', serialArr);
   };
-
-  return (
-    <div className={s.InputFile}>
-      <input className={s.input} type="file" onChange={e => uploadFilm(e)} />
-    </div>
-  );
+  
+    return (
+      <div className={s.InputFile}>
+        <input className={s.input} type="file" onChange={e => uploadFilm(e)} />
+      </div>
+    ); 
 };
 
 const mapDispatchToProps = {
