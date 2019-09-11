@@ -18,7 +18,7 @@ class AddFilmPage extends Component {
   addFilmHandler = () => {
     const data = this.state.newfilm;
     this.props.addFilm(data);
-    const serialFilm = JSON.stringify(data);
+    const serialFilm = JSON.stringify([data]);
     localStorage.setItem('newFilm', serialFilm);
     this.setState({
       newfilm: {
