@@ -1,43 +1,50 @@
-import React, { Component } from 'react';
-import { connect } from "react-redux";
-import { searchValue } from "../../components/ReduxStore/actions";
-import SearchInputView from "../../components/SearchInputView";
+import React from "react";
+import s from "./index.module.css";
+import icon from "../../assets/search-icon.png";
 
-class SearchInput extends Component {
-  state = {
-    inputValue: "",
-    searchTypeTitle: true
-  };
-
-  inputValueOnChange = e => {
-    this.setState({
-      inputValue: e.target.value
-    });
-    this.props.searchValue(this.state);
-  };
-
-  searchOnChange = e => {
-    this.setState({
-      searchTypeTitle: JSON.parse(e.target.value)
-    });
-  };
-
-  render() {
+const SearchInput = ({searchOnChange, inputValueOnChange, inputValue}) => {
     return (
-      <SearchInputView
-        searchOnChange={this.searchOnChange}
-        inputValueOnChange={this.inputValueOnChange}
-        inputValue={this.state.inputValue}
-      />
-    );
-  }
+        <div className={s.searchInput}>
+          <div className={s.inputItem}>
+            <input
+              className={s.radioInput}
+              name="rad"
+              type="radio"
+              id="id-1"
+              defaultChecked
+              value={true}
+              onChange={e => searchOnChange(e)}
+            />
+            <label className={s.label} htmlFor="id-1">
+              По названию
+            </label>
+          </div>
+    
+          <div className={s.inputItem}>
+            <input
+              className={s.radioInput}
+              name="rad"
+              type="radio"
+              id="id-2"
+              value={false}
+              onChange={e => searchOnChange(e)}
+            />
+            <label className={s.label} htmlFor="id-2">
+              По автору
+            </label>
+          </div>
+    
+          <div className={s.inputItem}>
+            <input
+              className={s.textInput}
+              type="text"
+              value={inputValue}
+              onChange={e => inputValueOnChange(e)}
+            />
+            <img className={s.imgSearch} src={icon} alt="search" />
+          </div>
+        </div>
+      );
 }
 
-const mapDispatchToProps = {
-  searchValue
-};
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(SearchInput);
+export default SearchInput;

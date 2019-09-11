@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import s from "./index.module.css";
 import FilmListItem from "../FilmListItem";
-import { filmLoaded } from '../ReduxStore/actions';
 import { connect } from "react-redux";
 
 class FilmList extends Component {
@@ -9,17 +8,27 @@ class FilmList extends Component {
     localStorageFilms: []
   };
 
-  // componentDidMount = () => {
-  //       const getfilms = JSON.parse(localStorage.getItem('filmArr'))
-  //       this.setState({
-  //         localStorageFilms: getfilms,
-  //       })
-  // };
+  componentDidMount = () => {
+        const getfilms = JSON.parse(localStorage.getItem('filmArr'))
+        if(getfilms){
+          this.setState({
+            localStorageFilms: getfilms,
+          })
+        }
+  };
 
   render() {
-    const { searchFilm } = this.props;
-  //  const filmsList = searchFilm.length === 0 ? this.state.localStorageFilms : searchFilm;
+    const { filmList, filterInfo } = this.props;
+    const {searchTypeTitle, inputValue} = filterInfo;
+
+    const searchType = searchTypeTitle ? "Title" : "Stars";
+
+   let listFilm = filmList.length === 0 ? this.state.localStorageFilms : filmList;
     
+   let searchFilm = listFilm.filter(film => {
+      return film[searchType].toLowerCase().includes(inputValue.toLowerCase().trim());
+    })
+  
     const list = searchFilm.map(film => {
       const { Title, ReleaseYear, Format, Stars } = film;
       return (
@@ -39,15 +48,11 @@ class FilmList extends Component {
   }
 }
 
-const mapStateToProps = ({ searchFilm }) => ({
-  searchFilm
+const mapStateToProps = ({ filmList }) => ({
+  filmList
 });
-
-const mapDispatchToProps = {
-  filmLoaded,
-}
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  null,
 )(FilmList);
